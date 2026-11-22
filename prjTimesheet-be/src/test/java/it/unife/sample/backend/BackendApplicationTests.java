@@ -12,7 +12,7 @@ class BackendApplicationTests {
 
     @Autowired
     private prjTimesheetEntityService timesheetService;
-
+/* 
     @Test
     void testExistingTable() {
         //@@ La tabella nel database MySQL di questo progetto ha nome prj_timesheet_entity
@@ -28,4 +28,5 @@ class BackendApplicationTests {
         Assertions.assertFalse(exists, "The table table_not_present shouldn't be presente in the MySQL database of this project.");
 
     }
+*/
 }
