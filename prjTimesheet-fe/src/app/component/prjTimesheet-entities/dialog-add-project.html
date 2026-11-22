@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Add Project</h2>
+<mat-dialog-content>
+  <p>Projects Timesheet</p>
+  <mat-form-field>
+    <label for="name">Project Name:</label>
+    <input [(ngModel)]="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <label for="resourceName">Resource Name:</label>
+    <input [(ngModel)]="resourceName" />
+  </mat-form-field>
+  <mat-form-field>
+    <label for="resourceName">Resource Surname:</label>
+    <input [(ngModel)]="resourceSurname" />
+  </mat-form-field>
+  <mat-form-field>
+    <label for="hours">Hours:</label>
+    <input [(ngModel)]="hours" />
+  </mat-form-field> 
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="save()">Save</button>
+</mat-dialog-actions>

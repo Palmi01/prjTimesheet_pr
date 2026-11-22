@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+//@@ Intestazione con immagine da file
+.intestazione {
+  background-image: url('./intestazione.png');
+  background-repeat: no-repeat;
+  background-size: 38% 390%; //@@ dimensione dello sfondo
+  height: 70px; //@@ altezza occupata nella pagina 
+}   

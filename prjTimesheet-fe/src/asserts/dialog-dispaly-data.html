@@ -1,0 +1,38 @@
+<!-- src/assets/dialog-display-data.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dati Progetto</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    h2 { color: #2c3e50; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    button { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2 id="projectTitle">Dati Progetto</h2>
+  <ul>
+    <li><strong>Analisi:</strong> <span id="analisys"></span> ore</li>
+    <li><strong>Design:</strong> <span id="design"></span> ore</li>
+    <li><strong>Implementazione:</strong> <span id="implementation"></span> ore</li>
+    <li><strong>Testing:</strong> <span id="testing"></span> ore</li>
+    <li><strong>Project Management:</strong> <span id="pm"></span> ore</li>
+  </ul>
+  <button onclick="window.close()">Chiudi</button>
+
+  <script>
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('projectTitle').innerText = `Progetto: ${params.get('name')}`;
+      document.getElementById('analisys').innerText = params.get('analisys');
+      document.getElementById('design').innerText = params.get('design');
+      document.getElementById('implementation').innerText = params.get('implementation');
+      document.getElementById('testing').innerText = params.get('testing');
+      document.getElementById('pm').innerText = params.get('pm');
+    };
+  </script>
+</body>
+</html>

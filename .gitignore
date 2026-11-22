@@ -1,0 +1,31 @@
+
+# Environment
+.env
+.env.local
+
+# Java / Gradle
+.gradle/
+build/
+bin/
+out/
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+
+# OS
+.DS_Store
+Thumbs.db
+
+relazione_esame/
+
+ 

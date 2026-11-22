@@ -1,0 +1,73 @@
+ 
+ 
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: prjtimesheet-mysql
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+    ports:
+      - "127.0.0.1:3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - timesheet-network
+
+  backend:
+    image: ${DOCKERHUB_USERNAME}/prjtimesheet-backend:latest
+    container_name: prjtimesheet-backend
+    restart: unless-stopped
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Rome
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${JPA_DDL_AUTO:-update}
+
+    ports:
+      - "127.0.0.1:8080:8080"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    networks:
+      - timesheet-network
+
+  frontend:
+    image: ${DOCKERHUB_USERNAME}/prjtimesheet-frontend:latest
+    container_name: prjtimesheet-frontend
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:4200:80"
+
+    depends_on:
+      - backend
+
+    networks:
+      - timesheet-network
+
+networks:
+  timesheet-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    name: prjtimesheet_mysql_data
